@@ -1,22 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
-  background: #e5e5e5;
-  width: 100%;
-  padding: 16px;
-  overflow-x: scroll;
-`;
-
 const Table = styled.table`
   width: 100%;
   background: #fafafa;
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12),
     0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  margin: 7px 0;
 `;
 
-const Body = styled.tr`
+const Body = styled.tbody`
+  display: block;
+  max-height: 500px;
+  overflow: scroll;
+`;
+
+const ItemBody = styled.tr`
   border-top: 1px solid black;
+  display: table;
+  width: 100%;
+  table-layout: fixed;
 `;
 
 const Header = styled.th`
@@ -31,24 +34,24 @@ const Item = styled.td`
 `;
 
 const RacerList = ({ racers }) => (
-  <Wrapper>
-    <Table>
-      <tbody>
-        <tr>
-          <Header>Name</Header>
-          <Header>Age</Header>
-          <Header>Distance</Header>
-        </tr>
-        {racers.map(racer => (
-          <Body key={racer.id}>
-            <Item>{racer.name}</Item>
-            <Item>{racer.age}</Item>
-            <Item>{racer.distance} miles</Item>
-          </Body>
-        ))}
-      </tbody>
-    </Table>
-  </Wrapper>
+  <Table>
+    <thead style={{ display: 'table', width: '100%', tableLayout: 'fixed' }}>
+      <tr>
+        <Header>Name</Header>
+        <Header>Age</Header>
+        <Header>Distance</Header>
+      </tr>
+    </thead>
+    <Body>
+      {racers.map(racer => (
+        <ItemBody key={racer.id}>
+          <Item>{racer.name}</Item>
+          <Item>{racer.age}</Item>
+          <Item>{racer.distance} miles</Item>
+        </ItemBody>
+      ))}
+    </Body>
+  </Table>
 );
 
 export default RacerList;

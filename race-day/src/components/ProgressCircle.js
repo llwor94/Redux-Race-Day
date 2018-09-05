@@ -4,8 +4,8 @@ import CircularProgressbar from 'react-circular-progressbar';
 import styled from 'styled-components';
 
 const Wrapper = styled(Col)`
-  padding: 10px 23px;
-
+  max-width: ${props => (props.sm ? '30%' : '100%')};
+  max-height: 75%;
   p {
     text-align: center;
     margin-bottom: ${props => (props.sm ? '5px' : '30px')};

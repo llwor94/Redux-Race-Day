@@ -1,7 +1,14 @@
-import { FETCHING_RACERS, FETCHING_RACERS_SUCCESS } from '../actions';
+import {
+  FETCHING_RACERS,
+  FETCHING_RACERS_SUCCESS,
+  FETCHING_CHECKED_IN,
+  FETCHING_CHECKED_IN_SUCCESS,
+} from '../actions';
 
 const initialState = {
   racers: [],
+  checkedInRacers: [],
+  fetchingCheckedIn: false,
   fetchingRacers: false,
 };
 
@@ -17,6 +24,17 @@ export const racerReducer = (state = initialState, action) => {
         ...state,
         fetchingRacers: false,
         racers: [...action.payload],
+      };
+    case FETCHING_RACERS:
+      return {
+        ...state,
+        fetchingCheckedIn: true,
+      };
+    case FETCHING_RACERS_SUCCESS:
+      return {
+        ...state,
+        fetchingCheckedIn: false,
+        checkedInRacers: [...action.payload],
       };
     default:
       return state;

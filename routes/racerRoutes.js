@@ -22,6 +22,24 @@ router.get('/:id', (req, res, next) => {
     .catch(err => next(err));
 });
 
+router.get('/checkedin', (req, res, next) => {
+  db('racers')
+    .where({ checkedIn: 1 })
+    .then(racers => {
+      res.status(200).json(racers);
+    })
+    .catch(err => next(err));
+});
+
+router.get('/signedup', (req, res, next) => {
+  db('racers')
+    .where({ checkedIn: 0 })
+    .then(racers => {
+      res.status(200).json(racers);
+    })
+    .catch(err => next(err));
+});
+
 router.post('/', (req, res, next) => {
   const racer = req.body;
   if (!(racer.name && racer.age && racer.distance)) {
