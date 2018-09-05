@@ -4,9 +4,11 @@ const morgan = require('morgan');
 
 const racerRoutes = require('./routes/racerRoutes');
 const server = express();
+const cors = require('cors');
 const mw = require('./middleware');
 
 server.use(express.json());
+server.use(cors());
 server.use(helmet());
 server.use(morgan('dev'));
 

@@ -12,6 +12,10 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+
+    p {
+      font-size: 10px;
+    }
   }
 `;
 

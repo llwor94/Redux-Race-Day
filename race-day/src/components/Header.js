@@ -5,7 +5,7 @@ import logo from '../assets/endurancescout.png';
 const Wrapper = styled.div`
   position: absolute;
   width: 100%;
-  height: 80px;
+  height: 65px;
   left: 0px;
   top: 0px;
   background: #292929;
@@ -13,8 +13,8 @@ const Wrapper = styled.div`
 
 const Title = styled.p`
   font-family: 'Roboto', sans-serif;
-  font-size: 47px;
-  line-height: 80px;
+  font-size: 34px;
+  line-height: 65px;
   text-align: left;
   padding: 0 150px;
   color: #fafafa;
