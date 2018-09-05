@@ -22,6 +22,18 @@ router.get('/:id', (req, res, next) => {
     .catch(err => next(err));
 });
 
+router.get('/distance/:distance', (req, res, next) => {
+  db('racers')
+    .where({ distance: req.params.distance })
+    .then(row => {
+      if (row.length < 1) {
+        return next({ code: 404 });
+      }
+      res.status(200).json(row);
+    })
+    .catch(err => next(err));
+});
+
 router.get('/checkedin', (req, res, next) => {
   db('racers')
     .where({ checkedIn: 1 })

@@ -19,7 +19,6 @@ const ItemBody = styled.tr`
   border-top: 1px solid black;
   display: table;
   width: 100%;
-  table-layout: fixed;
 `;
 
 const Header = styled.th`
@@ -35,7 +34,7 @@ const Item = styled.td`
 
 const RacerList = ({ racers }) => (
   <Table>
-    <thead style={{ display: 'table', width: '100%', tableLayout: 'fixed' }}>
+    <thead style={{ display: 'table', width: '100%' }}>
       <tr>
         <Header>Name</Header>
         <Header>Age</Header>
