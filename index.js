@@ -3,6 +3,8 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 
 const racerRoutes = require('./routes/racerRoutes');
+const distanceRoutes = require('./routes/distanceRoutes');
+const ageGroupRoutes = require('./routes/ageGroupRoutes');
 const server = express();
 const cors = require('cors');
 const mw = require('./middleware');
@@ -13,6 +15,8 @@ server.use(helmet());
 server.use(morgan('dev'));
 
 server.use('/api/racers', racerRoutes);
+server.use('/api/distances', distanceRoutes);
+server.use('/api/ages', ageGroupRoutes);
 server.use(mw);
 
 server.get('/', (req, res) => {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchRacers } from '../actions';
+import { checkedInRacers } from '../selectors';
+import { fetchRacers, fetchDistances, fetchAgeGroups } from '../actions';
 import RacerList from '../components/RacerList';
 import Box from '../components/Box';
 import Countdown from '../components/Countdown';
@@ -53,8 +54,11 @@ const SecondRow = styled(Row)`
 class Dashboard extends React.Component {
   componentDidMount() {
     this.props.fetchRacers();
+    this.props.fetchDistances();
+    this.props.fetchAgeGroups();
   }
   render() {
+    console.log(this.props.checkedInRacers.length / this.props.racers.length);
     return (
       <Wrapper>
         <LeftCol>
@@ -72,10 +76,17 @@ class Dashboard extends React.Component {
           </FirstRow>
           <SecondRow>
             <Box>
-              <Graph />
+              <Graph groups={this.props.ageGroups} />
             </Box>
             <Box size="37%">
-              <ProgressCircle name="Total Signed Up Racers" percent="40" />
+              <ProgressCircle
+                name="Total Signed Up Racers"
+                percent={Math.ceil(
+                  (this.props.checkedInRacers.length /
+                    this.props.racers.length) *
+                    100,
+                )}
+              />
             </Box>
           </SecondRow>
         </Col>
@@ -86,10 +97,12 @@ class Dashboard extends React.Component {
 
 const mapStateToProps = state => ({
   racers: state.racerReducer.racers,
+  ageGroups: state.ageGroupReducer.ageGroups,
+  checkedInRacers: checkedInRacers(state),
   fetchingRacers: state.racerReducer.fetchingRacers,
 });
 
 export default connect(
   mapStateToProps,
-  { fetchRacers },
+  { fetchRacers, fetchDistances, fetchAgeGroups },
 )(Dashboard);

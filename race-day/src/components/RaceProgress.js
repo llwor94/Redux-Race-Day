@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
 import ProgressCircle from './ProgressCircle';
 import styled from 'styled-components';
 
@@ -7,16 +8,26 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-around;
 `;
+
 class RaceProgress extends React.Component {
   render() {
     return (
       <Wrapper>
-        <ProgressCircle name="2 Mile" percent="50" small={true} />
-        <ProgressCircle name="3 Mile" percent="20" small={true} />
-        <ProgressCircle name="8 Mile" percent="68" small={true} />
+        {this.props.distances.map(distance => (
+          <ProgressCircle
+            key={distance.id}
+            name={`${distance.distance} Miles`}
+            percent={Math.ceil((distance.checkedIn / distance.racers) * 100)}
+            small={true}
+          />
+        ))}
       </Wrapper>
     );
   }
 }
 
-export default RaceProgress;
+const mapStateToProps = state => ({
+  distances: state.distanceReducer.distances,
+});
+
+export default connect(mapStateToProps)(RaceProgress);

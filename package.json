@@ -6,6 +6,7 @@
     "helmet": "^3.13.0",
     "knex": "^0.15.2",
     "morgan": "^1.9.0",
+    "reselect": "^3.0.1",
     "sqlite3": "^4.0.2"
   },
   "name": "redux-race-day",

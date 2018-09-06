@@ -22,26 +22,41 @@ router.get('/:id', (req, res, next) => {
     .catch(err => next(err));
 });
 
-router.get('/distance/:distance', (req, res, next) => {
+router.get('/distance/:id', (req, res, next) => {
   db('racers')
-    .where({ distance: req.params.distance })
-    .then(row => {
-      if (row.length < 1) {
+    .leftJoin('distances', 'racers.distance', 'distances.distance')
+    .where('distances.distance', req.params.id)
+    .select('*')
+    .then(racers => {
+      if (racers.length < 1) {
         return next({ code: 404 });
       }
-      res.status(200).json(row);
-    })
-    .catch(err => next(err));
-});
-
-router.get('/checkedin', (req, res, next) => {
-  db('racers')
-    .where({ checkedIn: 1 })
-    .then(racers => {
       res.status(200).json(racers);
     })
     .catch(err => next(err));
 });
+
+// router.get('/distance/:distance', (req, res, next) => {
+//   db('racers')
+//     .where({ distance: req.params.distance })
+//     .then(row => {
+//       if (row.length < 1) {
+//         return next({ code: 404 });
+//       }
+//       res.status(200).json(row);
+//     })
+//     .catch(err => next(err));
+// });
+
+// router.get('/checkedin', (req, res, next) => {
+//   db('racers')
+//     .where({ id: 1 })
+//     .then(racers => {
+//       console.log(racers);
+//       // res.status(200).json(racers);
+//     })
+//     .catch(err => next(err));
+// });
 
 router.get('/signedup', (req, res, next) => {
   db('racers')
