@@ -2,12 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import checked from '../assets/checked.svg';
 import multiply from '../assets/multiply.svg';
+import Highlight from 'react-highlighter';
+import up from '../assets/sort-up.svg';
+import down from '../assets/sort-down.svg';
 
 const Table = styled.div`
   width: 100%;
   max-width: 750px;
   height: ${props => (props.big ? '65%;' : '100%')};
   background: #fafafa;
+
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12),
     0 2px 4px -1px rgba(0, 0, 0, 0.2);
 
@@ -38,17 +42,27 @@ const ItemBody = styled.div`
 `;
 
 const Header = styled.div`
-  border-top-left-radius: ${props => (props.first ? '3px' : '0')};
-  border-top-right-radius: ${props => (props.last ? '3px' : '0')};
+  border-top-left-radius: ${props => (props.header === 'name' ? '3px' : '0')};
+  border-top-right-radius: ${props =>
+    props.header === 'status' ? '3px' : '0'};
   padding: 7px 10px;
   background: #292929;
   color: #fafafa;
   flex-basis: 0;
+  font-size: 14px;
   cursor: pointer;
-  flex-grow: ${props => (props.first ? '2' : '1')};
-  text-align: ${props => (props.first ? 'left' : 'center')};
+  display: flex;
+  align-items: flex-start;
+  justify-content: ${props =>
+    props.header === 'name' ? 'flex-start' : 'center'};
+  flex-grow: ${props => (props.header === 'name' ? '2' : '1')};
+  text-align: ${props => (props.header === 'name' ? 'left' : 'center')};
+  img {
+    width: ${props => (props.direction === 'up' ? '12px' : '12px')};
+    height: ${props => (props.direction === 'up' ? '21px' : '16px')};
+    padding: 5px 5px 0 0;
+  }
 `;
-
 const Item = styled.div`
   padding: 5px 8px;
   display: flex;
@@ -64,10 +78,18 @@ const Item = styled.div`
   }
 `;
 
+const StyledHighlight = styled(Highlight)`
+  mark {
+    font-weight: bold;
+    background-color: rgba(103, 191, 177, 0.5);
+  }
+`;
+
 class RacerList extends React.Component {
   state = {
     sortedList: [],
     sortedBy: '',
+    direction: 'up',
   };
 
   componentDidMount() {
@@ -76,37 +98,45 @@ class RacerList extends React.Component {
 
   handleSort = sort => {
     let sorted = [];
+    let direction = 'up';
     if (sort === this.state.sortedBy) {
       sorted = this.state.sortedList.reverse();
+      direction = this.state.direction === 'up' ? 'down' : 'up';
     } else {
       sorted = this.props.racers.sort((a, b) => {
-        if (sort === 'name') {
-          let textA = a.name.toUpperCase();
-          let textB = b.name.toUpperCase();
-          return textA.localeCompare(textB);
-        } else if (sort === 'age') {
-          return a.age - b.age;
-        } else if (sort === 'distance') {
-          return a.distance_id - b.distance_id;
-        } else {
-          return a.checked_in - b.checked_in;
+        switch (sort) {
+          case 'name':
+            let textA = a.name.toUpperCase();
+            let textB = b.name.toUpperCase();
+            return textA.localeCompare(textB);
+          case 'age':
+            return a.age - b.age;
+          case 'distance':
+            return a.distance_id - b.distance_id;
+          default:
+            return a.checked_in - b.checked_in;
         }
       });
     }
-    this.setState({ sortedList: sorted, sortedBy: sort });
+    this.setState({ sortedList: sorted, sortedBy: sort, direction: direction });
   };
   render() {
+    let headers = ['name', 'age', 'distance', 'status'];
     return (
       <Table big={this.props.big}>
         <HeaderWrap>
-          <Header first onClick={() => this.handleSort('name')}>
-            Name
-          </Header>
-          <Header onClick={() => this.handleSort('age')}>Age</Header>
-          <Header onClick={() => this.handleSort('distance')}>Distance</Header>
-          <Header last onClick={() => this.handleSort('status')}>
-            Status
-          </Header>
+          {headers.map(header => (
+            <Header
+              header={header}
+              direction={this.state.direction}
+              onClick={() => this.handleSort(header)}
+            >
+              {this.state.sortedBy === header && (
+                <img src={this.state.direction === 'up' ? up : down} />
+              )}
+              {header}
+            </Header>
+          ))}
         </HeaderWrap>
 
         <Body>
@@ -115,7 +145,11 @@ class RacerList extends React.Component {
               key={racer.id}
               onClick={() => this.props.handleClick(racer)}
             >
-              <Item first>{racer.name}</Item>
+              <Item first>
+                <StyledHighlight search={this.props.value}>
+                  {racer.name}
+                </StyledHighlight>
+              </Item>
               <Item>{racer.age}</Item>
               <Item>{racer.distance}</Item>
               <Item>

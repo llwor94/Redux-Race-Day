@@ -30,7 +30,6 @@ class SearchContainer extends React.Component {
   state = {
     value: '',
     filteredRacers: [],
-    // currentRacer: '',
   };
 
   componentDidMount() {
@@ -63,6 +62,7 @@ class SearchContainer extends React.Component {
         <SearchBar value={this.state.value} handleChange={this.filterRacers} />
         {!this.props.currentRacer ? (
           <RacerList
+            value={this.state.value}
             racers={
               this.state.filteredRacers.length
                 ? this.state.filteredRacers

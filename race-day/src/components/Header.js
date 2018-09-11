@@ -21,7 +21,7 @@ const Title = styled.p`
 
 const Header = () => (
   <Wrapper>
-    <Title>Master Race</Title>
+    <Title>Race Day</Title>
   </Wrapper>
 );
 

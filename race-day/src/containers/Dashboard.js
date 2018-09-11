@@ -1,20 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { checkedInRacers } from '../selectors';
 import { fetchRacers, fetchDistances, fetchAgeGroups } from '../actions';
 import RacerList from '../components/RacerList';
-import { Link } from 'react-router-dom';
 import Box from '../components/Box';
 import Countdown from '../components/Countdown';
 import RaceProgress from '../components/RaceProgress';
 import ProgressCircle from '../components/ProgressCircle';
 import Graph from '../components/Graph';
-import Button from '../components/Button';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  ${'' /* top: 65px;
-  left: 138px; */} width: calc(100% - 138px);
+  width: calc(100% - 138px);
   height: calc(100vh - 65px);
   margin: 0;
   max-width: 1300px;
@@ -27,7 +23,7 @@ const Col = styled.div`
   background: #e5e5e5;
   display: flex;
   height: 100%;
-  ${'' /* padding: 9px; */} flex-direction: column;
+  flex-direction: column;
   margin: 0 7px;
   border-radius: 3px;
   padding: 2px 4px;
@@ -38,6 +34,7 @@ const LeftCol = styled(Col)`
   max-width: 27%;
   background: #fafafa;
   padding: 0;
+  padding-bottom: 5px;
 `;
 
 const Row = styled.div`
@@ -46,14 +43,6 @@ const Row = styled.div`
 const FirstRow = styled(Row)`
   flex-basis: 0;
   flex-grow: 1;
-`;
-
-const ButtonWrapper = styled.div`
-  flex-basis: 0;
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-  padding: 0;
 `;
 
 const SecondRow = styled(Row)`
