@@ -10,6 +10,8 @@ exports.up = function(knex, Promise) {
       .integer('distance_id')
       .notNullable()
       .unsigned();
+    table.integer('checked_in').defaultTo(0);
+    table.integer('race_number').unsigned();
   });
 };
 

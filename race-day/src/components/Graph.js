@@ -32,7 +32,7 @@ const Graph = ({ groups }) => (
         <Bar
           style={{
             height: `calc(${Math.ceil(
-              (group.checkedIn / group.racers) * 100,
+              (group.checkedIn / group.total) * 100,
             )}% + 5px)`,
             width: '100%',
           }}

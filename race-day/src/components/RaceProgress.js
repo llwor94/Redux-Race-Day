@@ -16,8 +16,8 @@ class RaceProgress extends React.Component {
         {this.props.distances.map(distance => (
           <ProgressCircle
             key={distance.id}
-            name={`${distance.distance} Miles`}
-            percent={Math.ceil((distance.checkedIn / distance.racers) * 100)}
+            name={distance.distance}
+            percent={Math.ceil((distance.checkedIn / distance.total) * 100)}
             small={true}
           />
         ))}

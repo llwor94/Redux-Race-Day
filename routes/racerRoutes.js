@@ -47,13 +47,26 @@ router.get('/distance/:id', (req, res, next) => {
 //     .catch(err => next(err));
 // });
 
-router.get('/checkedin', (req, res, next) => {
-  db.getCheckedInRacers()
-    .then(racers => {
-      res.status(200).json(racers);
+router.post('/checkin', (req, res, next) => {
+  db.checkInRacer(req.body)
+    .then(response => {
+      if (response) {
+        return db.getRacer(req.body.id).then(response => {
+          res.status(200).json(response);
+        });
+      }
+      return next(400);
     })
     .catch(err => next(err));
 });
+
+// router.get('/checkedin', (req, res, next) => {
+//   db.getCheckedInRacers()
+//     .then(racers => {
+//       res.status(200).json(racers);
+//     })
+//     .catch(err => next(err));
+// });
 
 router.get('/signedup', (req, res, next) => {
   db('racers')

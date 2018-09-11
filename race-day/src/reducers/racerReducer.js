@@ -24,7 +24,7 @@ export const racerReducer = (state = initialState, action) => {
         ...state,
         fetchingRacers: false,
         racers: [...action.payload],
-        checkedInRacers: [action.payload.filter(racer => racer.checkedIn)],
+        checkedInRacers: action.payload.filter(racer => racer.checkedIn),
       };
     // case FETCHING_CHECKED_IN:
     //   return {

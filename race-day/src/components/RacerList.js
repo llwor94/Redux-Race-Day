@@ -76,9 +76,9 @@ const RacerList = ({ racers, big, handleClick }) => (
         <ItemBody key={racer.id} onClick={() => handleClick(racer)}>
           <Item first>{racer.name}</Item>
           <Item>{racer.age}</Item>
-          <Item>{racer.distance}m</Item>
+          <Item>{racer.distance}</Item>
           <Item>
-            <img src={racer.checkedIn ? checked : multiply} />
+            <img src={racer.checked_in ? checked : multiply} />
           </Item>
         </ItemBody>
       ))}

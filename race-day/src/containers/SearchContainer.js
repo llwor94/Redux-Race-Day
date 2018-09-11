@@ -1,6 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchRacers, fetchDistances, fetchAgeGroups } from '../actions';
+import {
+  fetchRacers,
+  fetchDistances,
+  fetchAgeGroups,
+  checkInRacer,
+} from '../actions';
 import RacerList from '../components/RacerList';
 import SearchBar from '../components/SearchBar';
 import RacerProfile from '../components/RacerProfile';
@@ -63,7 +68,12 @@ class SearchContainer extends React.Component {
             handleClick={this.selectRacer}
           />
         ) : (
-          <RacerProfile racer={this.state.currentRacer} />
+          <RacerProfile
+            racer={this.state.currentRacer}
+            handleSubmit={() =>
+              this.props.checkInRacer(this.state.currentRacer)
+            }
+          />
         )}
       </Wrapper>
     );
@@ -78,5 +88,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchRacers, fetchDistances, fetchAgeGroups },
+  { fetchRacers, fetchDistances, fetchAgeGroups, checkInRacer },
 )(SearchContainer);

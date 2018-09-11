@@ -111,7 +111,7 @@ class Dashboard extends React.Component {
 const mapStateToProps = state => ({
   racers: state.racerReducer.racers,
   ageGroups: state.ageGroupReducer.ageGroups,
-  checkedInRacers: checkedInRacers(state),
+  checkedInRacers: state.racerReducer.checkedInRacers,
   fetchingRacers: state.racerReducer.fetchingRacers,
 });
 

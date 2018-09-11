@@ -10,6 +10,7 @@ const Wrapper = styled.div`
   padding: 10px;
   background-color: #00897b;
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
 
@@ -17,6 +18,10 @@ const Wrapper = styled.div`
     font-family: 'Lato', sans-serif;
     color: #fafafa;
   }
+`;
+
+const TopWrapper = styled.div`
+  display: flex;
 `;
 
 const TextHeader = styled.div`
@@ -46,25 +51,25 @@ const Avatar = styled.img`
   border-radius: 3px;
 `;
 
-const RacerProfile = ({ racer }) => (
+const RacerProfile = ({ racer, handleSubmit }) => (
   <Wrapper>
-    <Avatar src={avatar} />
-    <TextHeader>
-      <h1>{racer.name}</h1>
-      <TextWrapper>
-        <InnerWrapper>
-          <h5>Distance</h5>
-          <p>
-            {racer.distance}
-            miles
-          </p>
-        </InnerWrapper>
-        <InnerWrapper>
-          <h5>Age</h5>
-          <p>{racer.age}</p>
-        </InnerWrapper>
-      </TextWrapper>
-    </TextHeader>
+    <TopWrapper>
+      <Avatar src={avatar} />
+      <TextHeader>
+        <h1>{racer.name}</h1>
+        <TextWrapper>
+          <InnerWrapper>
+            <h5>Distance</h5>
+            <p>{racer.distance}</p>
+          </InnerWrapper>
+          <InnerWrapper>
+            <h5>Age</h5>
+            <p>{racer.age}</p>
+          </InnerWrapper>
+        </TextWrapper>
+      </TextHeader>
+    </TopWrapper>
+    <Button title="Check In" main={true} handleClick={handleSubmit} />
   </Wrapper>
 );
 
