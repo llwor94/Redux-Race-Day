@@ -23,16 +23,6 @@ export const fetchRacers = () => dispatch => {
   });
 };
 
-// export const fetchCheckedIn = () => dispatch => {
-//   dispatch({ type: FETCHING_RACERS });
-//   axios.get(`${URL}/checkedin`).then(response => {
-//     dispatch({
-//       type: FETCHING_RACERS_SUCCESS,
-//       payload: response.data,
-//     });
-//   });
-// };
-
 export const fetchDistances = () => dispatch => {
   dispatch({ type: FETCHING_DISTANCES });
   axios.get(dURL).then(response => {

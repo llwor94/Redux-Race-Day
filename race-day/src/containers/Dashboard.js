@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { checkedInRacers } from '../selectors';
 import { fetchRacers, fetchDistances, fetchAgeGroups } from '../actions';
 import RacerList from '../components/RacerList';
+import { Link } from 'react-router-dom';
 import Box from '../components/Box';
 import Countdown from '../components/Countdown';
 import RaceProgress from '../components/RaceProgress';
@@ -16,10 +17,10 @@ const Wrapper = styled.div`
   top: 65px;
   left: 138px;
   width: calc(100% - 138px);
-  height: calc(100% - 95px);
+  height: calc(100vh - 95px);
   margin: 0;
-  max-width: 1550px;
-  max-height: 700px;
+  max-width: 1300px;
+  max-height: 800px;
   padding: 35px 10px;
   display: flex;
 `;
@@ -28,14 +29,15 @@ const Col = styled.div`
   background: #e5e5e5;
   display: flex;
   height: 100%;
-  padding: 9px;
-  flex-direction: column;
+  ${'' /* padding: 9px; */} flex-direction: column;
   margin: 0 7px;
 `;
 
 const LeftCol = styled(Col)`
   flex: 0 0 27%;
   max-width: 27%;
+  background: #fafafa;
+  padding: 0;
 `;
 
 const Row = styled.div`
@@ -44,6 +46,14 @@ const Row = styled.div`
 const FirstRow = styled(Row)`
   flex-basis: 0;
   flex-grow: 1;
+`;
+
+const ButtonWrapper = styled.div`
+  flex-basis: 0;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  padding: 0;
 `;
 
 const SecondRow = styled(Row)`
@@ -63,7 +73,10 @@ class Dashboard extends React.Component {
       <Wrapper>
         <LeftCol>
           <RacerList racers={this.props.racers} />
-          <Button title="Check In" />
+
+          <Link to="/checkin" style={{ width: '100%' }}>
+            <Button title="Check In" />
+          </Link>
         </LeftCol>
         <Col>
           <FirstRow>

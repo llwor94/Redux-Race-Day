@@ -14,6 +14,10 @@ const Wrapper = styled(Col)`
     font-family: 'Lato', sans-serif;
     font-size: ${props => (props.sm ? '16px' : '32px')};
   }
+
+  svg {
+    height: 100%;
+  }
 `;
 
 const ProgressCircle = ({ name, percent, small }) => (
@@ -22,7 +26,8 @@ const ProgressCircle = ({ name, percent, small }) => (
     <CircularProgressbar
       strokeWidth="11"
       styles={{
-        path: { stroke: small ? '#292929' : '67bfb1', strokeLinecap: 'butt' },
+        height: '75%',
+        path: { stroke: small ? '#292929' : '#67bfb1', strokeLinecap: 'butt' },
         text: { fill: small ? '#00897b' : '#67BFB1' },
         trail: { stroke: '#eee' },
       }}

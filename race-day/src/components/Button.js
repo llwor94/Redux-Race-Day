@@ -5,6 +5,7 @@ const StyledButton = styled.button`
   width: 100%;
   height: 55px;
   background: #00897b;
+  border: 3px solid #00897b;
   font-family: Lato;
   font-weight: 600;
   line-height: 22px;
@@ -14,6 +15,11 @@ const StyledButton = styled.button`
   color: #fafafa;
   display: block;
   padding: 10px 20px;
+  cursor: pointer;
+
+  &:hover {
+    text-underline: none;
+  }
 `;
 
 const Button = ({ title }) => <StyledButton>{title}</StyledButton>;

@@ -4,31 +4,42 @@ import checked from '../assets/checked.svg';
 import multiply from '../assets/multiply.svg';
 
 const Table = styled.div`
-  width: 100%;
+  width: ${props => (props.big ? '60%;' : '100%')};
+  height: ${props => (props.big ? '70%;' : '90%')};
   background: #fafafa;
-  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12),
-    0 2px 4px -1px rgba(0, 0, 0, 0.2);
-  margin: 7px 0;
+  ${
+    '' /* box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12),
+    0 2px 4px -1px rgba(0, 0, 0, 0.2); */
+  }
+  border-radius: ${props => (props.big ? '3px' : '0')};
 `;
 
 const Body = styled.div`
   display: block;
-  max-height: 500px;
+  max-height: calc(100% - 40px);
   overflow: scroll;
 `;
 
 const HeaderWrap = styled.div`
   display: flex;
   width: 100%;
+  border-radius: 3px;
 `;
 
 const ItemBody = styled.div`
-  border-top: 1px solid black;
+  border-top: 1px solid #bdbdbd;
   display: flex;
   width: 100%;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #e5e5e5;
+  }
 `;
 
 const Header = styled.div`
+  border-top-left-radius: ${props => (props.first ? '3px' : '0')};
+  border-top-right-radius: ${props => (props.last ? '3px' : '0')};
   padding: 7px 10px;
   background: #292929;
   color: #fafafa;
@@ -51,18 +62,18 @@ const Item = styled.div`
   }
 `;
 
-const RacerList = ({ racers }) => (
-  <Table>
+const RacerList = ({ racers, big, handleClick }) => (
+  <Table big={big}>
     <HeaderWrap>
       <Header first>Name</Header>
       <Header>Age</Header>
       <Header>Distance</Header>
-      <Header>Status</Header>
+      <Header last>Status</Header>
     </HeaderWrap>
 
     <Body>
       {racers.map(racer => (
-        <ItemBody key={racer.id}>
+        <ItemBody key={racer.id} onClick={() => handleClick(racer)}>
           <Item first>{racer.name}</Item>
           <Item>{racer.age}</Item>
           <Item>{racer.distance}m</Item>

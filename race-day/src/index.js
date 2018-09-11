@@ -19,6 +19,7 @@ injectGlobal`
     padding: 0;
   };
   html, body, #root {
+    background: #fafafa;
     width: 100%;
     height: 100%;
   }

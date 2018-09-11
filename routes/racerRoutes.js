@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../dbConfig.js');
+const db = require('../data/helpers/racerDb');
 
 router.get('/', (req, res, next) => {
-  db('racers')
+  db.getAllRacers()
     .then(racers => {
       res.status(200).json(racers);
     })
@@ -11,8 +11,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/:id', (req, res, next) => {
-  db('racers')
-    .where({ id: req.params.id })
+  db.getRacer(req.params.id)
     .then(row => {
       if (row.length < 1) {
         return next({ code: 404 });
@@ -48,15 +47,13 @@ router.get('/distance/:id', (req, res, next) => {
 //     .catch(err => next(err));
 // });
 
-// router.get('/checkedin', (req, res, next) => {
-//   db('racers')
-//     .where({ id: 1 })
-//     .then(racers => {
-//       console.log(racers);
-//       // res.status(200).json(racers);
-//     })
-//     .catch(err => next(err));
-// });
+router.get('/checkedin', (req, res, next) => {
+  db.getCheckedInRacers()
+    .then(racers => {
+      res.status(200).json(racers);
+    })
+    .catch(err => next(err));
+});
 
 router.get('/signedup', (req, res, next) => {
   db('racers')
