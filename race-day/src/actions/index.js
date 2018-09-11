@@ -11,6 +11,7 @@ export const FETCHING_AGE_GROUPS_SUCCESS = 'FETCHING_AGE_GROUPS_SUCCESS';
 export const CHECK_IN_RACER = 'CHECK_IN_RACER';
 export const CHECK_IN_RACER_SUCCESS = 'CHECK_IN_RACER_SUCCESS';
 export const SELECT_RACER = 'SELECT_RACER';
+export const DESELECT_RACER = 'DESELECT_RACER';
 
 const URL = 'http://localhost:3500/api/racers';
 const dURL = 'http://localhost:3500/api/distances';
@@ -66,4 +67,8 @@ export const checkInRacer = racer => dispatch => {
 export const selectRacer = racer => ({
   type: SELECT_RACER,
   payload: racer,
+});
+
+export const deselectRacer = () => ({
+  type: DESELECT_RACER,
 });

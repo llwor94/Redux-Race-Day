@@ -6,6 +6,7 @@ import {
   fetchAgeGroups,
   checkInRacer,
   selectRacer,
+  deselectRacer,
 } from '../actions';
 import RacerList from '../components/RacerList';
 import SearchBar from '../components/SearchBar';
@@ -13,18 +14,14 @@ import RacerProfile from '../components/RacerProfile';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  position: absolute;
-  top: 65px;
-  left: 138px;
   width: calc(100% - 138px);
-  height: calc(100% - 95px);
   margin: 0;
   max-width: 1300px;
-  max-height: 800px;
-  padding: 35px 10px;
+  height: calc(100vh - 65px);
+  padding: 35px 20px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
   background: #fafafa;
 `;
@@ -74,6 +71,7 @@ class SearchContainer extends React.Component {
             handleSubmit={() =>
               this.props.checkInRacer(this.props.currentRacer)
             }
+            handleClose={this.props.deselectRacer}
           />
         )}
       </Wrapper>
@@ -90,5 +88,12 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchRacers, fetchDistances, fetchAgeGroups, checkInRacer, selectRacer },
+  {
+    fetchRacers,
+    fetchDistances,
+    fetchAgeGroups,
+    checkInRacer,
+    selectRacer,
+    deselectRacer,
+  },
 )(SearchContainer);

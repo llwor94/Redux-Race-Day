@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import logo from '../assets/endurancescout.png';
 
 const Wrapper = styled.div`
-  position: absolute;
   width: 100%;
   height: 65px;
   left: 0px;

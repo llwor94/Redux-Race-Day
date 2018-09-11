@@ -6,6 +6,7 @@ import {
   FETCHING_CHECKED_IN,
   FETCHING_CHECKED_IN_SUCCESS,
   SELECT_RACER,
+  DESELECT_RACER,
 } from '../actions';
 
 const initialState = {
@@ -39,6 +40,11 @@ export const racerReducer = (state = initialState, action) => {
       return {
         ...state,
         currentRacer: action.payload,
+      };
+    case DESELECT_RACER:
+      return {
+        ...state,
+        currentRacer: '',
       };
     // case FETCHING_CHECKED_IN:
     //   return {

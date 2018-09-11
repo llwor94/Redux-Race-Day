@@ -12,13 +12,6 @@ const FlipperWrapper = styled.div`
   perspective: 1000px;
 `;
 
-// const FlipperBody = styled.div`
-//   width: 100%;
-//   height: 100%;
-//   transform-style: preserve-3d;
-//   transition: all .7s linear;
-//   transform: ${props => props.flip ? 'rotateY(180deg)' : 'none'};
-// `
 const Wrapper = styled.div`
   border-radius: 3px;
   position: absolute;
@@ -28,6 +21,7 @@ const Wrapper = styled.div`
   height: 100%;
   padding: 10px;
   backface-visibility: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   background-image: linear-gradient(to right bottom, #015147, #1c6861);
   display: flex;
   flex-direction: column;
@@ -47,6 +41,10 @@ const Front = styled(Wrapper)`
 
 const Back = styled(Wrapper)`
   transform: ${props => (props.flip ? 'rotateY(0)' : 'rotateY(-180deg)')};
+  span {
+    color: #fafafa;
+    cursor: pointer;
+  }
 `;
 
 const TopWrapper = styled.div`
@@ -80,7 +78,7 @@ const Avatar = styled.img`
   border-radius: 3px;
 `;
 
-const RacerProfile = ({ racer, handleSubmit }) => (
+const RacerProfile = ({ racer, handleSubmit, handleClose }) => (
   <FlipperWrapper>
     <Front flip={racer.checked_in}>
       <TopWrapper>
@@ -102,6 +100,7 @@ const RacerProfile = ({ racer, handleSubmit }) => (
       <Button title="Check In" main={true} handleClick={handleSubmit} />
     </Front>
     <Back flip={racer.checked_in}>
+      <span onClick={handleClose}>&times;</span>
       <h1>Yo we flipped! {racer.name} is checked in yooo</h1>
     </Back>
   </FlipperWrapper>

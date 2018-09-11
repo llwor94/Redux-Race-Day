@@ -13,11 +13,9 @@ import Button from '../components/Button';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  position: absolute;
-  top: 65px;
-  left: 138px;
-  width: calc(100% - 138px);
-  height: calc(100vh - 95px);
+  ${'' /* top: 65px;
+  left: 138px; */} width: calc(100% - 138px);
+  height: calc(100vh - 65px);
   margin: 0;
   max-width: 1300px;
   max-height: 800px;
@@ -31,6 +29,8 @@ const Col = styled.div`
   height: 100%;
   ${'' /* padding: 9px; */} flex-direction: column;
   margin: 0 7px;
+  border-radius: 3px;
+  padding: 2px 4px;
 `;
 
 const LeftCol = styled(Col)`

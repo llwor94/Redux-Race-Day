@@ -4,11 +4,9 @@ import { NavLink } from 'react-router-dom';
 
 const Wrapper = styled.div`
   width: 138px;
-  height: 100%;
+
   background: #efefef;
-  position: absolute;
-  left: 0px;
-  top: 65px;
+
   padding: 30px 15px;
 `;
 

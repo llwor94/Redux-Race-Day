@@ -9,6 +9,12 @@ import Sidebar from './components/Sidebar';
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
+const BodyWrapper = styled.div`
+  display: flex;
 `;
 
 class App extends Component {
@@ -16,11 +22,13 @@ class App extends Component {
     return (
       <Wrapper>
         <Header />
-        <Sidebar />
-        <Switch>
-          <Route exact path="/" component={Dashboard} />
-          <Route path="/checkin" component={SearchContainer} />
-        </Switch>
+        <BodyWrapper>
+          <Sidebar />
+          <Switch>
+            <Route exact path="/" component={Dashboard} />
+            <Route path="/checkin" component={SearchContainer} />
+          </Switch>
+        </BodyWrapper>
       </Wrapper>
     );
   }

@@ -9,6 +9,7 @@ const StyledBox = styled.div`
     0 2px 4px -1px rgba(0, 0, 0, 0.2);
   flex-basis: 0;
   flex-grow: 1;
+  border-radius: 3px;
 `;
 
 const SizedBox = styled(StyledBox)`

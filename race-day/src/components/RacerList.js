@@ -4,8 +4,9 @@ import checked from '../assets/checked.svg';
 import multiply from '../assets/multiply.svg';
 
 const Table = styled.div`
-  width: ${props => (props.big ? '60%;' : '100%')};
-  height: ${props => (props.big ? '70%;' : '100%')};
+  width: 100%;
+  max-width: 750px;
+  height: ${props => (props.big ? '65%;' : '100%')};
   background: #fafafa;
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12),
     0 2px 4px -1px rgba(0, 0, 0, 0.2);
