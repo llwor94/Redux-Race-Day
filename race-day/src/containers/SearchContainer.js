@@ -5,6 +5,7 @@ import {
   fetchDistances,
   fetchAgeGroups,
   checkInRacer,
+  selectRacer,
 } from '../actions';
 import RacerList from '../components/RacerList';
 import SearchBar from '../components/SearchBar';
@@ -32,7 +33,7 @@ class SearchContainer extends React.Component {
   state = {
     value: '',
     filteredRacers: [],
-    currentRacer: '',
+    // currentRacer: '',
   };
 
   componentDidMount() {
@@ -50,14 +51,14 @@ class SearchContainer extends React.Component {
   };
 
   selectRacer = racer => {
-    this.setState({ currentRacer: racer });
+    this.props.selectRacer(racer);
   };
 
   render() {
     return (
       <Wrapper>
         <SearchBar value={this.state.value} handleChange={this.filterRacers} />
-        {!this.state.currentRacer ? (
+        {!this.props.currentRacer ? (
           <RacerList
             racers={
               this.state.filteredRacers.length
@@ -69,9 +70,9 @@ class SearchContainer extends React.Component {
           />
         ) : (
           <RacerProfile
-            racer={this.state.currentRacer}
+            racer={this.props.currentRacer}
             handleSubmit={() =>
-              this.props.checkInRacer(this.state.currentRacer)
+              this.props.checkInRacer(this.props.currentRacer)
             }
           />
         )}
@@ -81,6 +82,7 @@ class SearchContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  currentRacer: state.racerReducer.currentRacer,
   racers: state.racerReducer.racers,
   ageGroups: state.ageGroupReducer.ageGroups,
   fetchingRacers: state.racerReducer.fetchingRacers,
@@ -88,5 +90,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchRacers, fetchDistances, fetchAgeGroups, checkInRacer },
+  { fetchRacers, fetchDistances, fetchAgeGroups, checkInRacer, selectRacer },
 )(SearchContainer);

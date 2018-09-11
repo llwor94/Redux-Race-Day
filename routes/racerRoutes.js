@@ -40,7 +40,8 @@ router.post('/checkin', (req, res, next) => {
     .then(response => {
       if (response) {
         console.log(response);
-        return db.getRacer(req.body.id).then(response => {
+        return db.getRacer(req.body).then(response => {
+          console.log(response);
           res.status(200).json(response);
         });
       }

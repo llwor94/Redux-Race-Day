@@ -14,8 +14,11 @@ module.exports = {
         'distances.distance',
       );
   },
-  getRacer: function(id) {
-    return db('racers').where('id', '=', id);
+  getRacer: function(racer) {
+    return db('racers')
+      .leftJoin('distances', 'distances.id', racer.distance_id)
+      .where('racers.id', '=', racer.id)
+      .first();
   },
   getCheckedInRacers: function() {
     return db('racers').where({ checked_in: 1 });

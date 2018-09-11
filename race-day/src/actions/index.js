@@ -9,6 +9,8 @@ export const FETCHING_DISTANCES_SUCCESS = 'FETCHING_DISTANCES_SUCCESS';
 export const FETCHING_AGE_GROUPS = 'FETCHING_AGE_GROUPS';
 export const FETCHING_AGE_GROUPS_SUCCESS = 'FETCHING_AGE_GROUPS_SUCCESS';
 export const CHECK_IN_RACER = 'CHECK_IN_RACER';
+export const CHECK_IN_RACER_SUCCESS = 'CHECK_IN_RACER_SUCCESS';
+export const SELECT_RACER = 'SELECT_RACER';
 
 const URL = 'http://localhost:3500/api/racers';
 const dURL = 'http://localhost:3500/api/distances';
@@ -56,7 +58,12 @@ export const fetchAgeGroups = () => dispatch => {
 
 export const checkInRacer = racer => dispatch => {
   dispatch({ type: CHECK_IN_RACER });
-  axios
-    .post(`${URL}/checkin`, racer)
-    .then(response => console.log(response.data));
+  axios.post(`${URL}/checkin`, racer).then(response => {
+    dispatch({ type: CHECK_IN_RACER_SUCCESS, payload: response.data });
+  });
 };
+
+export const selectRacer = racer => ({
+  type: SELECT_RACER,
+  payload: racer,
+});
