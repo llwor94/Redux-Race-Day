@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProgressCircle from './ProgressCircle';
 import styled from 'styled-components';
@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   justify-content: space-around;
 `;
 
-class RaceProgress extends React.Component {
+class RaceProgress extends Component {
   render() {
     return (
       <Wrapper>

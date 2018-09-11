@@ -57,11 +57,10 @@ class Dashboard extends React.Component {
     this.props.fetchAgeGroups();
   }
   render() {
-    console.log(this.props.checkedInRacers.length / this.props.racers.length);
     return (
       <Wrapper>
         <LeftCol>
-          <RacerList racers={this.props.racers} />
+          <RacerList racers={this.props.racers} value="" />
         </LeftCol>
         <Col>
           <FirstRow>

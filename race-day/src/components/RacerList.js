@@ -131,14 +131,18 @@ class RacerList extends React.Component {
     return (
       <Table big={this.props.big}>
         <HeaderWrap>
-          {headers.map(header => (
+          {headers.map((header, i) => (
             <Header
+              key={i}
               header={header}
               direction={this.state.direction}
               onClick={() => this.handleSort(header)}
             >
               {this.state.sortedBy === header && (
-                <img src={this.state.direction === 'up' ? up : down} />
+                <img
+                  src={this.state.direction === 'up' ? up : down}
+                  alt="arrow"
+                />
               )}
               {header}
             </Header>
@@ -159,7 +163,10 @@ class RacerList extends React.Component {
               <Item>{racer.age}</Item>
               <Item>{racer.distance}</Item>
               <Item>
-                <img src={racer.checked_in ? checked : multiply} />
+                <img
+                  src={racer.checked_in ? checked : multiply}
+                  alt="checked in"
+                />
               </Item>
             </ItemBody>
           ))}
