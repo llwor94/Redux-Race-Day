@@ -89,11 +89,17 @@ class RacerList extends React.Component {
   state = {
     sortedList: [],
     sortedBy: '',
-    direction: 'up',
+    direction: '',
   };
 
-  componentDidMount() {
-    this.handleSort('status');
+  componentDidUpdate(prevProps) {
+    if (this.props.racers !== prevProps.racers) {
+      this.setState({
+        sortedList: [...this.props.racers],
+        sortedBy: 'status',
+        direction: 'up',
+      });
+    }
   }
 
   handleSort = sort => {
@@ -103,7 +109,7 @@ class RacerList extends React.Component {
       sorted = this.state.sortedList.reverse();
       direction = this.state.direction === 'up' ? 'down' : 'up';
     } else {
-      sorted = this.props.racers.sort((a, b) => {
+      sorted = this.state.sortedList.sort((a, b) => {
         switch (sort) {
           case 'name':
             let textA = a.name.toUpperCase();
@@ -140,7 +146,7 @@ class RacerList extends React.Component {
         </HeaderWrap>
 
         <Body>
-          {this.props.racers.map(racer => (
+          {this.state.sortedList.map(racer => (
             <ItemBody
               key={racer.id}
               onClick={() => this.props.handleClick(racer)}
