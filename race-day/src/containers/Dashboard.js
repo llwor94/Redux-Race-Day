@@ -73,10 +73,6 @@ class Dashboard extends React.Component {
       <Wrapper>
         <LeftCol>
           <RacerList racers={this.props.racers} />
-
-          <Link to="/checkin" style={{ width: '100%' }}>
-            <Button title="Check In" />
-          </Link>
         </LeftCol>
         <Col>
           <FirstRow>

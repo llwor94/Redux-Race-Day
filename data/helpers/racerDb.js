@@ -2,7 +2,17 @@ const db = require('../dbConfig.js');
 
 module.exports = {
   getAllRacers: function() {
-    return db('racers');
+    return db('racers')
+      .join('distances', 'distances.id', 'racers.distance_id')
+      .select(
+        'racers.id',
+        'racers.name',
+        'racers.age',
+        'racers.checked_in',
+        'racers.race_number',
+        'racers.distance_id',
+        'distances.distance',
+      );
   },
   getRacer: function(id) {
     return db('racers').where('id', '=', id);
@@ -12,7 +22,6 @@ module.exports = {
   },
   checkInRacer: function(racer) {
     let query = db('racers')
-      // .where('id', '=', racer.id)
       .leftJoin('distances', 'distances.id', racer.distance_id)
       .select('current_count')
       .first();
