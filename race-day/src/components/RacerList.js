@@ -44,6 +44,7 @@ const Header = styled.div`
   background: #292929;
   color: #fafafa;
   flex-basis: 0;
+  cursor: pointer;
   flex-grow: ${props => (props.first ? '2' : '1')};
   text-align: ${props => (props.first ? 'left' : 'center')};
 `;
@@ -63,28 +64,69 @@ const Item = styled.div`
   }
 `;
 
-const RacerList = ({ racers, big, handleClick }) => (
-  <Table big={big}>
-    <HeaderWrap>
-      <Header first>Name</Header>
-      <Header>Age</Header>
-      <Header>Distance</Header>
-      <Header last>Status</Header>
-    </HeaderWrap>
+class RacerList extends React.Component {
+  state = {
+    sortedList: [],
+    sortedBy: '',
+  };
 
-    <Body>
-      {racers.map(racer => (
-        <ItemBody key={racer.id} onClick={() => handleClick(racer)}>
-          <Item first>{racer.name}</Item>
-          <Item>{racer.age}</Item>
-          <Item>{racer.distance}</Item>
-          <Item>
-            <img src={racer.checked_in ? checked : multiply} />
-          </Item>
-        </ItemBody>
-      ))}
-    </Body>
-  </Table>
-);
+  componentDidMount() {
+    this.handleSort('status');
+  }
+
+  handleSort = sort => {
+    let sorted = [];
+    if (sort === this.state.sortedBy) {
+      sorted = this.state.sortedList.reverse();
+    } else {
+      sorted = this.props.racers.sort((a, b) => {
+        if (sort === 'name') {
+          let textA = a.name.toUpperCase();
+          let textB = b.name.toUpperCase();
+          return textA.localeCompare(textB);
+        } else if (sort === 'age') {
+          return a.age - b.age;
+        } else if (sort === 'distance') {
+          return a.distance_id - b.distance_id;
+        } else {
+          return a.checked_in - b.checked_in;
+        }
+      });
+    }
+    this.setState({ sortedList: sorted, sortedBy: sort });
+  };
+  render() {
+    return (
+      <Table big={this.props.big}>
+        <HeaderWrap>
+          <Header first onClick={() => this.handleSort('name')}>
+            Name
+          </Header>
+          <Header onClick={() => this.handleSort('age')}>Age</Header>
+          <Header onClick={() => this.handleSort('distance')}>Distance</Header>
+          <Header last onClick={() => this.handleSort('status')}>
+            Status
+          </Header>
+        </HeaderWrap>
+
+        <Body>
+          {this.props.racers.map(racer => (
+            <ItemBody
+              key={racer.id}
+              onClick={() => this.props.handleClick(racer)}
+            >
+              <Item first>{racer.name}</Item>
+              <Item>{racer.age}</Item>
+              <Item>{racer.distance}</Item>
+              <Item>
+                <img src={racer.checked_in ? checked : multiply} />
+              </Item>
+            </ItemBody>
+          ))}
+        </Body>
+      </Table>
+    );
+  }
+}
 
 export default RacerList;

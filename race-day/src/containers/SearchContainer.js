@@ -40,10 +40,16 @@ class SearchContainer extends React.Component {
   }
 
   filterRacers = e => {
+    console.log(e.target.value);
     const filtered = this.props.racers.filter(racer =>
       racer.name.toLowerCase().includes(e.target.value.toLowerCase()),
     );
 
+    if (filtered.length === 1) {
+      this.props.selectRacer(filtered[0]);
+    } else {
+      this.props.deselectRacer();
+    }
     this.setState({ value: e.target.value, filteredRacers: filtered });
   };
 
